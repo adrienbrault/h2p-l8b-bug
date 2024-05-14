@@ -17,6 +17,7 @@ let messages = [
         "content": "Your task is to Extract key financial data and ratios from NVDA's SEC filings."
     }
 ];
+const maxTokens = 250;
 const promises = [
     ...quants.map(
         quant => fetch(`${ollamaHost}/v1/chat/completions`, {
@@ -36,7 +37,7 @@ const promises = [
             body: JSON.stringify({
                 model: `adrienbrault/nous-hermes2pro-llama3-8b:${quant}`,
                 options: {
-                    num_predict: 50,
+                    num_predict: maxTokens,
                 },
                 stream: false,
                 messages
